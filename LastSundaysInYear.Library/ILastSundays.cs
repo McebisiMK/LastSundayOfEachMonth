@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace LastSundaysInYear.Library
 {
-    public interface ILastSundayInYear
+    public interface ILastSundays
     {
         List<DateTime> GetLastSundays(int year);
     }

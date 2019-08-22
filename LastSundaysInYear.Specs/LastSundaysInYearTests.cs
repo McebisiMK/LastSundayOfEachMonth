@@ -5,7 +5,6 @@ using LastSundaysInYear.Library;
 using LastSundaysInYear.Library.Exceptions;
 using LastSundaysInYear.Library.ILastSundayOfMonth;
 using LastSundaysInYear.Library.IValidations;
-using LastSundaysInYear.Library.Validations;
 using NSubstitute;
 using NUnit.Framework;
 
@@ -20,7 +19,11 @@ namespace LastSundaysInYear.Specs
         public void GetLastSundays_Given_Invalid_Year_Should_Throw_Exception_With_Message(int year)
         {
             //-----------------------Arrange------------------------------
-            var lastSundaysInYear = CreateLastSundaysInYear();
+            var validator = Substitute.For<IValidator>();
+            var lastSunday = Substitute.For<ILastSunday>();
+            var lastSundaysInYear = new LastSundays(validator, lastSunday);
+
+            validator.When(x => x.Validate(year)).Throw(new InvalidYearException());
 
             //-----------------------Act----------------------------------
             var exception = Assert.Throws<InvalidYearException>(() => lastSundaysInYear.GetLastSundays(year));
@@ -46,6 +49,25 @@ namespace LastSundaysInYear.Specs
             validator.Received(1).Validate(year);
         }
 
+        [TestCase(-2010)]
+        [TestCase(99999)]
+        [TestCase(0)]
+        public void GetLastSundays_Given_Invalid_Year_Should_Not_Call_GetLastSunday_Method(int year)
+        {
+            //-----------------------Arrange------------------------------
+            var validator = Substitute.For<IValidator>();
+            var lastSunday = Substitute.For<ILastSunday>();
+            var lastSundaysInYear = new LastSundays(validator, lastSunday);
+
+            validator.When(x => x.Validate(year)).Throw(new InvalidYearException());
+
+            //-----------------------Act----------------------------------
+            var exception = Assert.Throws<InvalidYearException>(() => lastSundaysInYear.GetLastSundays(year));
+
+            //-----------------------Assert-------------------------------
+            lastSunday.DidNotReceive().GetLastSunday(Arg.Any<int>(), Arg.Any<int>());
+        }
+
         [TestCase(1111)]
         [TestCase(2014)]
         [TestCase(2010)]
@@ -68,7 +90,7 @@ namespace LastSundaysInYear.Specs
         {
             //---------------------------------Arrange-------------------------------------------------
             var year = 2013;
-            var lastSundaysOfTheYear = CreateLastSundaysInYear();
+            var lastSundaysOfTheYear = new LastSundays();
 
             //---------------------------------Act-----------------------------------------------------
             var actual = lastSundaysOfTheYear.GetLastSundays(year);
@@ -97,11 +119,6 @@ namespace LastSundaysInYear.Specs
                             new DateTime(year,11,24),
                             new DateTime(year,12,29)
                         };
-        }
-
-        private LastSundays CreateLastSundaysInYear()
-        {
-            return new LastSundays();
         }
     }
 }

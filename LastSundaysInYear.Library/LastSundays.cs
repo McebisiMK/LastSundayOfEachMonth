@@ -7,7 +7,7 @@ using LastSundaysInYear.Library.Validations;
 
 namespace LastSundaysInYear.Library
 {
-    public class LastSundays : ILastSundayInYear
+    public class LastSundays : ILastSundays
     {
         private readonly IValidator _validator;
         private readonly ILastSunday _lastSunday;
