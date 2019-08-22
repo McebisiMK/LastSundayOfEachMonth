@@ -85,19 +85,6 @@ namespace LastSundaysInYear.Specs
             lastSunday.Received(12).GetLastSunday(year, Arg.Is<int>(month => month >= 1 && month <= 12));
         }
 
-        [TestCase(2010, 00)]
-        public void GetLastSunday_Given_Valid_Year_And_Invalid_Month_Should_Throw_Exception_With_Message(int year, int month)
-        {
-            //-----------------------Arrange------------------------------
-            var lastSunday = new LastSunday();
-
-            //-----------------------Act----------------------------------
-            var exception = Assert.Throws<InvalidMonthException>(() => lastSunday.GetLastSunday(year, month));
-
-            //-----------------------Assert-------------------------------
-            exception.Message.Should().Be("Month must be between 1 and 12!!");
-        }
-
         [Test]
         public void GetLastSundays_GivenValidYear_ShouldGetLastSundayOfEachMonth()
         {
