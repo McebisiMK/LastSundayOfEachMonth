@@ -82,7 +82,7 @@ namespace LastSundaysInYear.Specs
             lastSundaysInYear.GetLastSundays(year);
 
             //-----------------------Assert-------------------------------
-            lastSunday.Received(12).GetLastSunday(Arg.Any<int>(), Arg.Any<int>());
+            lastSunday.Received(12).GetLastSunday(year, Arg.Is<int>(month => month >= 1 && month <= 12));
         }
 
         [Test]
