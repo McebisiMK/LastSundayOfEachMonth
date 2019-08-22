@@ -16,6 +16,7 @@ namespace LastSundaysInYear.App
             {
                 Console.WriteLine("Please enter a year!");
                 var year = ConvertInput();
+                Console.WriteLine();
                 try
                 {
                     var sundays = lastSundays.GetLastSundays(year);
@@ -23,10 +24,9 @@ namespace LastSundaysInYear.App
                 }
                 catch (InvalidYearException exception)
                 {
-                    Console.WriteLine();
                     Console.WriteLine(exception.Message);
+                    Console.WriteLine();
                 }
-                Console.WriteLine();
                 Console.WriteLine("Press 'Y' if you want to check another year!");
                 terminator = Console.ReadLine();
                 Console.WriteLine();
@@ -44,8 +44,8 @@ namespace LastSundaysInYear.App
 
         private static void Display(List<DateTime> sundays)
         {
-            Console.WriteLine();
             sundays.ForEach(sunday => Console.WriteLine(sunday.ToShortDateString()));
+            Console.WriteLine();
         }
     }
 }
