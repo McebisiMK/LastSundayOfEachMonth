@@ -88,14 +88,14 @@ namespace LastSundaysInYear.Specs
         [Test]
         public void GetLastSundayOfEachMonth_GivenValidYear_ShouldGetLastSundayOfEachMonth()
         {
-            //---------------------------------Arrange-------------------------------------------------
+            //-----------------------Arrange------------------------------
             var year = 2013;
             var lastSundaysOfTheYear = new LastSundays();
 
-            //---------------------------------Act-----------------------------------------------------
+            //-----------------------Act----------------------------------
             var actual = lastSundaysOfTheYear.GetLastSundays(year);
 
-            //---------------------------------Assert--------------------------------------------------
+            //-----------------------Assert-------------------------------
             var expectedSundays = GetLastSundaysInYear(year);
 
             actual.Should().BeEquivalentTo(expectedSundays);
