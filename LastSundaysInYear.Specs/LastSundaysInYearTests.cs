@@ -13,7 +13,7 @@ namespace LastSundaysInYear.Specs
     [TestFixture]
     public class LastSundaysInYearTests
     {
-        [TestCase(-1)]
+        [TestCase(-2011)]
         [TestCase(0000)]
         [TestCase(11111)]
         public void GetLastSundays_Given_Invalid_Year_Should_Throw_Exception_With_Message(int year)
