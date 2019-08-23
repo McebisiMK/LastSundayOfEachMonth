@@ -6,7 +6,7 @@ public class LastSunday : ILastSunday
 {
     public DateTime GetLastSunday(int year, int month)
     {
-        if (month < 1 || month > 12)
+        if (Invalid(month))
             throw new InvalidMonthException();
 
         var monthEnd = DateTime.DaysInMonth(year, month);
@@ -22,5 +22,10 @@ public class LastSunday : ILastSunday
         var day = new DateTime(year, month, monthEnd).DayOfWeek;
 
         return day;
+    }
+
+    private bool Invalid(int month)
+    {
+        return (month < 1 || month > 12);
     }
 }

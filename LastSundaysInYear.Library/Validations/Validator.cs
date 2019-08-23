@@ -7,8 +7,13 @@ namespace LastSundaysInYear.Library.Validations
     {
         public void Validate(int year)
         {
-            if (year < 1 || year > 9999)
+            if (Invalid(year))
                 throw new InvalidYearException();
+        }
+
+        private bool Invalid(int year)
+        {
+            return (year < 1 || year > 9999);
         }
     }
 }
