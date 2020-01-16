@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
+using Autofac;
 using LastSundaysInYear.Library;
 using LastSundaysInYear.Library.Exceptions;
 
@@ -10,8 +10,10 @@ namespace LastSundaysInYear.App
     {
         static void Main(string[] args)
         {
-            var lastSundays = new LastSundays();
+            var container = Container();
+            var lastSundays = container.Resolve<ILastSundays>();
             var terminator = "Y";
+
             while (terminator.ToUpper() == "Y")
             {
                 Console.WriteLine("Please enter a year!");
@@ -32,6 +34,14 @@ namespace LastSundaysInYear.App
                 Console.WriteLine();
             }
             Console.ReadKey();
+        }
+
+        private static IContainer Container()
+        {
+            var containerBuilder = new ContainerBuilder();
+            containerBuilder.RegisterModule<Modules>();
+
+            return containerBuilder.Build();
         }
 
         private static int ConvertInput()
