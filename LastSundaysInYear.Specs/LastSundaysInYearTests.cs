@@ -2,9 +2,11 @@ using System;
 using System.Collections.Generic;
 using FluentAssertions;
 using LastSundaysInYear.Library;
+using LastSundaysInYear.Library._LastSunday;
 using LastSundaysInYear.Library.Exceptions;
 using LastSundaysInYear.Library.ILastSundayOfMonth;
 using LastSundaysInYear.Library.IValidations;
+using LastSundaysInYear.Library.Validations;
 using NSubstitute;
 using NUnit.Framework;
 
@@ -90,7 +92,9 @@ namespace LastSundaysInYear.Specs
         {
             //-----------------------Arrange------------------------------
             var year = 2013;
-            var lastSundaysOfTheYear = new LastSundays();
+            var validator = new Validator();
+            var lastSunday = new LastSunday();
+            var lastSundaysOfTheYear = new LastSundays(validator, lastSunday);
 
             //-----------------------Act----------------------------------
             var actual = lastSundaysOfTheYear.GetLastSundays(year);
