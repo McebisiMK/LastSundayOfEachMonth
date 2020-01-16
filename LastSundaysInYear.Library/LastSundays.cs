@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using System.Linq;
 using LastSundaysInYear.Library.ILastSundayOfMonth;
 using LastSundaysInYear.Library.IValidations;
-using LastSundaysInYear.Library.Validations;
 
 namespace LastSundaysInYear.Library
 {
@@ -11,10 +10,6 @@ namespace LastSundaysInYear.Library
     {
         private readonly IValidator _validator;
         private readonly ILastSunday _lastSunday;
-
-        public LastSundays() : this(new Validator(), new LastSunday())
-        {
-        }
 
         public LastSundays(IValidator validator, ILastSunday lastSunday)
         {
