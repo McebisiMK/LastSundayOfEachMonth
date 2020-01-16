@@ -103,7 +103,7 @@ namespace LastSundaysInYear.Specs
             var expectedSundays = GetLastSundaysInYear(year);
 
             actual.Should().BeEquivalentTo(expectedSundays);
-
+            actual.Count.Should().Be(12);
         }
 
         private List<DateTime> GetLastSundaysInYear(int year)
