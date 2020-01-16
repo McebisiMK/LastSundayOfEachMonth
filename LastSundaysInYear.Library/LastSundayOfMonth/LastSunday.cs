@@ -2,30 +2,33 @@ using System;
 using LastSundaysInYear.Library.Exceptions;
 using LastSundaysInYear.Library.ILastSundayOfMonth;
 
-public class LastSunday : ILastSunday
+namespace LastSundaysInYear.Library._LastSunday
 {
-    public DateTime GetLastSunday(int year, int month)
+    public class LastSunday : ILastSunday
     {
-        if (Invalid(month))
-            throw new InvalidMonthException();
+        public DateTime GetLastSunday(int year, int month)
+        {
+            if (Invalid(month))
+                throw new InvalidMonthException();
 
-        var monthEnd = DateTime.DaysInMonth(year, month);
-        var monthEndDay = GetMonthEndDay(year, month, monthEnd);
-        var lastSunday = new DateTime(year, month, (monthEnd - (int)monthEndDay));
+            var monthEnd = DateTime.DaysInMonth(year, month);
+            var monthEndDay = GetMonthEndDay(year, month, monthEnd);
+            var lastSunday = new DateTime(year, month, (monthEnd - (int)monthEndDay));
 
-        return lastSunday;
+            return lastSunday;
 
-    }
+        }
 
-    private DayOfWeek GetMonthEndDay(int year, int month, int monthEnd)
-    {
-        var day = new DateTime(year, month, monthEnd).DayOfWeek;
+        private DayOfWeek GetMonthEndDay(int year, int month, int monthEnd)
+        {
+            var day = new DateTime(year, month, monthEnd).DayOfWeek;
 
-        return day;
-    }
+            return day;
+        }
 
-    private bool Invalid(int month)
-    {
-        return (month < 1 || month > 12);
+        private bool Invalid(int month)
+        {
+            return (month < 1 || month > 12);
+        }
     }
 }
